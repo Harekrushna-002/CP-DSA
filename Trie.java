@@ -23,9 +23,9 @@ public class Trie {
             int idx=ch - 'a';
             if(curr.children[idx] == null){
                 curr.children[idx]=new Node();
-                if(i == word.length()-1){
-                    curr.children[idx].eow=true;
-                }
+            }
+            if(i == word.length()-1){
+                curr.children[idx].eow=true;
             }
             curr=curr.children[idx];
         }
@@ -37,15 +37,13 @@ public class Trie {
         for(int i=0;i<key.length();i++){
             char ch=key.charAt(i);
             int idx=ch - 'a';
-            if(curr.children[idx] != null){
-                if(i == key.length()-1 && curr.children[idx].eow == false){
-                    return false;
-                }
-                curr=curr.children[idx];
-            }
-            else{
+            if(curr.children[idx] == null){
                 return false;
             }
+            if(i == key.length()-1 && curr.children[idx].eow == false){
+                return false;
+            }
+            curr=curr.children[idx];
         }
         return true;
     }
